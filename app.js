@@ -18,8 +18,9 @@ var app = new Vue({
         opponentLevel: 35,
         battleText: "What will Meganium do?",
         newGame: "Start Battle",
-        battleOptions: ["Fight", "Pokemon", "Item", "Run"],
+        battleOptions: ["Attack", "Special Attack", "Heal", "Run"],
         userAttackDamage: [05,10,15,25],
+        specialUserAttackDamage: [20,25,30,40],
         opponentAttacks: ["Tackle", "Iron Tail", "Rock Slide", "Slam"],
         opponentAttackDamage: [05,10,15,25],
         fightOptions: ["Attack", "Special Attack", "Heal"],
@@ -48,15 +49,17 @@ var app = new Vue({
             if (this.pickWinner()) {
                 return;
             }
- 
             // Opponent Attacks Player (reduce playerHP)
-            this.userHP -= this.opponentDamage();
-            // Player defeated
-            this.pickWinner();
+            this.opponentAttack();
         },
         specialAttack: function () {
-            var attack = this.userAttackDamage[Math.floor(Math.random()*this.userAttackDamage.length)];
-            console.log(attack);
+            this.opponentHP -= this.specialAttackDamage();
+            // Player Wins
+            if (this.pickWinner()) {
+                return;
+            }
+            // Opponent Attacks Player (reduce playerHP)
+            this.opponentAttack();
         },
         heal: function () {
 
@@ -64,6 +67,7 @@ var app = new Vue({
         run: function () {
 
         },
+        // --------------- Attacks ------------------
         // Randomly select an attack number from our array
         userDamage: function () {
             return this.userAttackDamage[Math.floor(Math.random()*this.userAttackDamage.length)];
@@ -71,7 +75,17 @@ var app = new Vue({
         opponentDamage: function () {
             return this.opponentAttackDamage[Math.floor(Math.random()*this.opponentAttackDamage.length)];
         },
-        // Choose our winner
+        specialAttackDamage: function () {
+            return this.specialUserAttackDamage[Math.floor(Math.random()*this.specialUserAttackDamage.length)];
+        },
+        // --------------- Damage ------------------
+        // Damage to us done by our opponent
+        opponentAttack: function () {
+            this.userHP -= this.opponentDamage();
+            // Player defeated
+            this.pickWinner();
+        },
+        // --------------- Choose our winner ------------
         pickWinner: function () {
             if (this.opponentHP <= 0) {
                 if (confirm((this.opponentPokemon) + ' has fainted! You Won! New Battle?')) {
