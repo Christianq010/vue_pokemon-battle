@@ -71,7 +71,8 @@ var app = new Vue({
             this.opponentAttack();
         },
         run: function () {
-
+            this.gameIsRunning = false;
+            alert('You ran away');
         },
         // --------------- Attacks ------------------
         // Randomly select an attack number from our array
