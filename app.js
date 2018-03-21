@@ -78,7 +78,7 @@ var app = new Vue({
             }
             // Add to turns (our notification log)
             this.turns.unshift({
-                isUser: true,
+                isHealed: true,
                 text: this.userPokemon + ' heals up by 15'
             });
             this.opponentAttack();
