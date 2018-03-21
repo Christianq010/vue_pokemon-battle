@@ -61,8 +61,14 @@ var app = new Vue({
             // Opponent Attacks Player (reduce playerHP)
             this.opponentAttack();
         },
+        // Gives Player some HP, but not over 100
         heal: function () {
-
+            if (this.userHP <= 85) {
+                this.userHP += 15;
+            } else {
+                this.userHP = 100;
+            }
+            this.opponentAttack();
         },
         run: function () {
 
