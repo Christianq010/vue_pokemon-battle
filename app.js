@@ -36,6 +36,7 @@ var app = new Vue({
             this.gameIsRunning = true;
             this.userHP = 100;
             this.opponentHP = 100;
+            this.turns = [];
         },
         attack: function () {
             // Player Attacks (reduce opponentHP)
@@ -44,7 +45,7 @@ var app = new Vue({
             // Add to turns (our notification log)
             this.turns.unshift({
                 isUser: true,
-                text: this.userPokemon + ' hits ' + this.opponentPokemon + ' for ' + damage
+                text: this.userPokemon + ' hurts ' + this.opponentPokemon + ' by ' + damage
             });
             // Player Wins
             if (this.pickWinner()) {
@@ -54,7 +55,13 @@ var app = new Vue({
             this.opponentAttack();
         },
         specialAttack: function () {
-            this.opponentHP -= this.specialAttackDamage();
+            var damage = this.specialAttackDamage()
+            this.opponentHP -= damage;
+            // Add to turns (our notification log)
+            this.turns.unshift({
+                isUser: true,
+                text: this.userPokemon + ' uses a special attack on ' + this.opponentPokemon
+            });
             // Player Wins
             if (this.pickWinner()) {
                 return;
@@ -69,6 +76,11 @@ var app = new Vue({
             } else {
                 this.userHP = 100;
             }
+            // Add to turns (our notification log)
+            this.turns.unshift({
+                isUser: true,
+                text: this.userPokemon + ' heals up by 15'
+            });
             this.opponentAttack();
         },
         run: function () {
@@ -94,7 +106,7 @@ var app = new Vue({
             // Add to turns (our notification log)
             this.turns.unshift({
                 isUser: false,
-                text: this.opponentPokemon + ' hits ' + this.userPokemon + ' for ' + damage
+                text: this.opponentPokemon + ' hurts ' + this.userPokemon + ' by ' + damage
             });
             // Player defeated
             this.pickWinner();
