@@ -74,7 +74,7 @@
             <!-- Second Options Box-->
             <div class="second-text-box-right" v-if="turns.length > 0">
                 <ul class="second-text">
-                    <li 
+                    <li
                         v-for="turn in turns"
                         v-bind:class=" {'text-green': turn.isUser, 'text-red': !turn.isUser, 'text-blue': turn.isHealed} ">
                         {{turn.text}}

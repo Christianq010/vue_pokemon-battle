@@ -21,14 +21,8 @@ var app = new Vue({
         battleOptions: ["Attack", "Special Attack", "Heal", "Run"],
         userAttackDamage: [05,10,15,25],
         specialUserAttackDamage: [20,25,30,40],
-        opponentAttacks: ["Tackle", "Iron Tail", "Rock Slide", "Slam"],
         opponentAttackDamage: [05,10,15,25],
-        fightOptions: ["Attack", "Special Attack", "Heal"],
-        endOptions: ["Yes", "No"],
         gameIsRunning: false,
-        optionsOn: false,
-        fightOn: false,
-        endOn: false,
         turns: []
     },
     methods: {
