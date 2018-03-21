@@ -26,10 +26,12 @@
         </div>
         <!-- /end of Opponent HP Level -->
         
+        <!-- Opponent Pokemon -->
         <div class="box-top-right">
             <img v-if="opponentAlive" v-bind:src="opponentPokemonSrc" class="pokemon-top" />
         </div>
         
+        <!-- User Pokemon -->
         <div class="box-bottom-left">
             <img v-if="userAlive" v-bind:src="userPokemonSrc" class="pokemon-bottom" />
         </div>
@@ -40,7 +42,7 @@
             <div class="hp-bar-bottom">
                 <div
                     class="hp-bar-fill"
-                    v-bind:style=" {width: startUserHP + '%'} ">
+                    v-bind:style=" {width: userHP + '%'} ">
                 </div>
         </div>
         <h4 class="level">Lv{{userLevel}}</h4>
@@ -55,26 +57,17 @@
                 {{battleText}}
             </div>
             <!-- Start a new game button -->
-            <div v-if="!fightOn">
-                <button class="new-game">{{newGame}}</button>
+            <div v-if="!gameIsRunning">
+                <button v-on:click="startGame" class="new-game">{{newGame}}</button>
             </div>
             <!-- Options Box -->
-            <div class="text-box-right" v-else>
-                <div v-if="optionsOn" id="battleOptions">
-                    <h4 v-on:click="processOption(1)" class="battle-text-top-left">{{battleOptions[0]}}</h4>
-                    <h4 v-on:click="processOption(2)" class="battle-text-top-right">{{battleOptions[1]}}</h4>
-                    <h4 v-on:click="processOption(3)" class="battle-text-bottom-left">{{battleOptions[2]}}</h4>
-                    <h4 v-on:click="processOption(4)" class="battle-text-bottom-right">{{battleOptions[3]}}</h4> 
-                </div>
-                <div v-if="fightOn" id="fightOptions">
-                    <h4 v-on:click="processAttack(1)" class="battle-text-top-left">{{fightOptions[0]}}</h4>
-                    <h4 v-on:click="processAttack(2)" class="battle-text-top-right">{{fightOptions[1]}}</h4>
-                    <h4 v-on:click="processAttack(3)" class="battle-text-bottom-left">{{fightOptions[2]}}</h4>
-                    <h4 v-on:click="processAttack(4)" class="battle-text-bottom-right">{{fightOptions[3]}}</h4> 
-                </div>
-                <div v-if="endOn" id="endOptions">
-                    <h4 v-on:click="resetBattle" class="battle-text-top-left">{{endOptions[0]}}</h4>
-                    <h4 class="battle-text-top-right">{{endOptions[1]}}</h4>
+            <div class="text-box-right" v-if="gameIsRunning">
+                <!-- Battle Options -->
+                <div id="battleOptions">
+                    <h4 v-on:click="attack" class="battle-text-top-left">{{battleOptions[0]}}</h4>
+                    <h4 v-on:click="specialAttack" class="battle-text-top-right">{{battleOptions[1]}}</h4>
+                    <h4 v-on:click="heal" class="battle-text-bottom-left">{{battleOptions[2]}}</h4>
+                    <h4 v-on:click="run" class="battle-text-bottom-right">{{battleOptions[3]}}</h4> 
                 </div>
             </div>
             <!-- /end of Options Box -->
