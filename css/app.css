@@ -187,6 +187,29 @@ body {
   border: solid 6px #6F677F;
 }
 
+/* Notification Box */
+.second-text-box-right {
+    position: absolute;
+    width: 55%;
+    top: 11%;
+    right: 40%;
+    height: 80%;
+    background: #F8F8F8;
+    border: solid 6px #6F677F;
+    overflow-y:scroll;
+    white-space:nowrap;
+}
+
+.second-text,ul,li {
+    font-weight: bold;
+    list-style: none;
+    margin: 0 auto;
+    opacity: 0.95;
+    font-size: 15px;
+    color: #333333;
+    font-family: "PT Sans Narrow";
+}
+
 .battle-text {
   margin-top: 1%;
   margin-left: 5%;

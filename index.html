@@ -71,6 +71,15 @@
                 </div>
             </div>
             <!-- /end of Options Box -->
+            <!-- Second Options Box-->
+            <div class="second-text-box-right" v-if="turns.length > 0">
+                <ul class="second-text">
+                    <li v-for="turn in turns">
+                        {{turn.text}}
+                    </li>
+                </ul>
+            </div>
+            <!-- /end of Second Options Box -->
         </div> 
         <!-- /end of Player Selection Menu -->
     </div> 

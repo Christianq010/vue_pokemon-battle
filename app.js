@@ -29,12 +29,7 @@ var app = new Vue({
         optionsOn: false,
         fightOn: false,
         endOn: false,
-    userHpBar: {
-        width: "100%"
-    },
-    opponentHpBar: {
-        width: "100%"
-    }
+        turns: []
     },
     methods: {
         startGame: function () {
@@ -44,7 +39,13 @@ var app = new Vue({
         },
         attack: function () {
             // Player Attacks (reduce opponentHP)
-            this.opponentHP -= this.userDamage();
+            var damage = this.userDamage();
+            this.opponentHP -= damage;
+            // Add to turns (our notification log)
+            this.turns.unshift({
+                isUser: true,
+                text: this.userPokemon + ' hits ' + this.opponentPokemon + ' for ' + damage
+            });
             // Player Wins
             if (this.pickWinner()) {
                 return;
@@ -88,7 +89,13 @@ var app = new Vue({
         // --------------- Damage ------------------
         // Damage to us done by our opponent
         opponentAttack: function () {
-            this.userHP -= this.opponentDamage();
+            var damage = this.opponentDamage();
+            this.userHP -= damage;
+            // Add to turns (our notification log)
+            this.turns.unshift({
+                isUser: false,
+                text: this.opponentPokemon + ' hits ' + this.userPokemon + ' for ' + damage
+            });
             // Player defeated
             this.pickWinner();
         },
