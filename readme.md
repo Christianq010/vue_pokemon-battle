@@ -1,6 +1,8 @@
 # Pokemon Battle
 _A project built on Vue 2._
 
+[![Preview](https://preview.ibb.co/jsDWec/KcgqhwC.jpg)](https://ibb.co/kmEF5H)
+
 Hosted via Github Pages at - https://christianq010.github.io/vue_pokemon-battle/index.html
 
 ## Description
